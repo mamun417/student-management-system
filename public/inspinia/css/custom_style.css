@@ -1,0 +1,107 @@
+.action_btn {
+    margin-bottom: 0px!important;
+    padding: 2px 10px!important;
+}
+.pagination > .active > a, .pagination > .active > span,
+.pagination > .active > a:hover, .pagination > .active > span:hover,
+.pagination > .active > a:focus, .pagination > .active > span:focus{
+    background-color: #18A689!important;
+    color: #fff!important;
+    border-color: #18A689;
+}
+.modal-footer{
+    padding: 8px 15px!important;
+}
+.modal-footer .btn{
+    margin-bottom: 0px!important;
+}
+.ibox{
+    padding-top: 22px;
+}
+.ibox-title{
+    border-style: none;
+}
+.search_sec {
+    margin-bottom: 8px;
+}
+.table > thead > tr > th, .table > tbody > tr > th,
+.table > tfoot > tr > th, .table > thead > tr > td,
+.table > tbody > tr > td, .table > tfoot > tr > td{
+    vertical-align: middle;
+    text-align: center;
+}
+.cus_thumbnail{
+    width: 60px!important;
+    height: 55px!important;
+}
+
+.control-label{
+    padding-top: 0px!important;
+}
+.preview_image {
+    height: 112px;
+    width: 80%;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.parent_category{
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.selected_category {
+    color: #1ab394!important;
+    font-weight: bold;
+}
+.alert{
+    margin-bottom: 0px;
+}
+.invalid-feedback{
+    color: red;
+}
+.cus_mini_icon{
+    font-size: 20px;
+    padding: 0px 3px;
+}
+.color-danger{
+    color: #bd2130;
+}
+.color-success{
+    color: #1c84c6;
+}
+.required-star{
+    color: red;
+}
+div.dataTables_wrapper div.dataTables_paginate {
+    margin: 20px 0 -30px 0;
+    white-space: nowrap;
+     text-align: left;
+}
+.form-horizontal .form-group {
+    margin-right: 0;
+    margin-left: 0;
+}
+.submit_btn_section{
+    margin-top: 30px;
+}
+.profile-element img{
+    height: 48px;
+    width: 48px;
+}
+.go_to_site {
+    text-align: center;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 5px 0;
+}
+.go_to_site a{
+    color: #fff;
+}
+.chosen-container-single .chosen-single{
+    padding: 4px 12px;!important;
+}
+.custom_img_hw{
+    height: 130px!important;
+    width: 130px!important;
+}
