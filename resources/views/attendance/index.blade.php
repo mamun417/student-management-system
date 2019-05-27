@@ -22,7 +22,7 @@
 
         <div class="row">
 
-            @can('attendance-create')
+            @role('teacher')
 
                 <div class="col-lg-12">
                     <div class="ibox float-e-margins">
@@ -47,7 +47,7 @@
                     </div>
                 </div>
 
-            @endcan
+            @endrole
 
             <div class="col-lg-12">
                 <div class="ibox float-e-margins">

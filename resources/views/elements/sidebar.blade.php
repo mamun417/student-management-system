@@ -80,7 +80,7 @@
 
             @endrole
 
-            @role('teacher|student')
+            @role('teacher|student|admin')
                 <li class="{{ (currentController() == 'AttendanceController')? 'active':'' }}">
                     <a href="{{ route('attendances.index') }}"><i class="fa fa-address-book-o" aria-hidden="true"></i> <span class="nav-label">Attendance</span> </a>
                 </li>
@@ -92,9 +92,15 @@
                 </li>
             @endrole
 
-            @role('parent')
-                <li class="{{ (currentController() == 'ClassRoutineController')? 'active':'' }}">
-                    <a href="{{ route('class_routine.index') }}"><i class="fa fa-child" aria-hidden="true"></i> <span class="nav-label">Class Routine</span> </a>
+            @role('student')
+                <li class="{{ (Route::getFacadeRoot()->current()->uri() == 'class-routine')? 'active':'' }}">
+                    <a href="{{ route('class-routine.index') }}"><i class="fa fa-child" aria-hidden="true"></i> <span class="nav-label">Class Routine</span> </a>
+                </li>
+            @endrole
+
+            @role('admin')
+                <li class="{{ (currentController() == 'ReportController')? 'active':'' }}">
+                    <a href="{{ route('reports.index') }}"><i class="fa fa-child" aria-hidden="true"></i> <span class="nav-label">Report</span> </a>
                 </li>
             @endrole
 

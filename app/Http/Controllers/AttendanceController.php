@@ -18,12 +18,12 @@ class AttendanceController extends Controller
      */
     function __construct()
     {
-        $this->middleware('role:teacher|student');
+        $this->middleware('role:teacher|student|admin');
         $this->middleware('role:teacher', ['only' => 'show']);
-        $this->middleware('permission:attendance-list');
-        $this->middleware('permission:attendance-create', ['only' => ['store']]);
-        $this->middleware('permission:attendance-edit', ['only' => ['edit','update']]);
-        $this->middleware('permission:attendance-delete', ['only' => ['destroy']]);
+        $this->middleware('permission:attendance-list', ['only' => 'index']);
+        $this->middleware(['role:teacher', 'permission:attendance-create'], ['only' => ['store']]);
+        $this->middleware(['role:teacher', 'permission:attendance-edit'], ['only' => ['edit','update']]);
+        $this->middleware(['role:teacher', 'permission:attendance-delete'], ['only' => ['destroy']]);
     }
 
     public function index()
@@ -33,9 +33,11 @@ class AttendanceController extends Controller
         $students = Student::latest()->get();
 
         if (Auth()->user()->hasRole('student')){
-            $attendances = Attendance::latest()->where('student_id', Auth()->user()->student->id)->get();
+            $attendances = Attendance::with('teacher', 'class', 'student')->latest()->where('student_id', Auth()->user()->student->id)->get();
+        }else if (Auth()->user()->hasRole('admin')){
+            $attendances = Attendance::with('teacher', 'class', 'student')->latest()->get();
         }else{
-            $attendances = Attendance::latest()->where('teacher_id', Auth()->user()->teacher->id)->get();
+            $attendances = Attendance::with('teacher', 'class', 'student')->latest()->where('teacher_id', Auth()->user()->teacher->id)->get();
         }
 
         return view('attendance.index', compact('attendances', 'teachers', 'classes', 'students'));
@@ -80,7 +82,7 @@ class AttendanceController extends Controller
 
         $store = Attendance::create($request->all());
 
-        return back();
+        return redirect(route('attendances.index'))->with('success', 'Attendance add successfully');
     }
 
     /**

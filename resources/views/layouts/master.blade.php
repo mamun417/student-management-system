@@ -24,6 +24,7 @@
     <link href="{{ asset('public/inspinia/css/plugins/jasny/jasny-bootstrap.min.css') }}" rel="stylesheet">
     <link href="{{ asset('public/inspinia/css/plugins/iCheck/custom.css') }}" rel="stylesheet">
     <link href="{{ asset('public/inspinia/css/plugins/chosen/bootstrap-chosen.css') }}" rel="stylesheet">
+    <link href="{{ asset('public/inspinia/css/plugins/datapicker/datepicker3.css') }}" rel="stylesheet">
     <link href="{{ asset('public/inspinia/css/plugins/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css') }}" rel="stylesheet">
 
     <link href="{{ asset('public/inspinia/css/custom_style.css') }}" rel="stylesheet">
@@ -33,6 +34,9 @@
 
     {{--Chosen--}}
     <script src="{{ asset('public/inspinia/js/plugins/chosen/chosen.jquery.js') }} "></script>
+
+    {{--Date Picker--}}
+    <script src="{{ asset('public/inspinia/js/plugins/datapicker/bootstrap-datepicker.js') }}"></script>
 
 </head>
 

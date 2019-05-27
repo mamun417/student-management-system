@@ -25,9 +25,19 @@ Route::group(['middleware' => ['auth', 'preventBackHistory']], function (){
     Route::resource('students', 'StudentController');
     Route::resource('attendances', 'AttendanceController');
 
-    Route::get('childrens/index', 'ChildrenController@index')->name('childrens.index');
+    //Children..........
+    Route::get('childrens', 'ChildrenController@index')->name('childrens.index');
     Route::get('childrens/{children}', 'ChildrenController@show')->name('childrens.show');
     Route::get('childrens/{children}/attendance', 'ChildrenController@attendance')->name('childrens.attendance');
+
+    //Class Routine.........
+    Route::get('class-routine', function (){
+        return view('class_routine.index');
+    })->name('class-routine.index');
+
+    //Report................
+    Route::get('reports', 'ReportController@index')->name('reports.index');
+    Route::post('reports-create', 'ReportController@create')->name('reports.create');
 
     //Admin profile Routes.....................................
     Route::get('profile', 'UserController@showProfile')->name('profile');
