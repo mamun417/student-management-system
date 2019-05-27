@@ -4,10 +4,10 @@
 
     <div class="row wrapper border-bottom white-bg page-heading">
         <div class="col-lg-10">
-            <h2>All Parent</h2>
+            <h2>All Permission</h2>
             <ol class="breadcrumb">
                 <li>
-                    <a href="{{ route('parents.index') }}">Parent</a>
+                    <a href="{{ route('class.index') }}">Permission</a>
                 </li>
                 <li class="active">
                     <strong>Index</strong>
@@ -16,7 +16,7 @@
         </div>
         <div class="col-lg-2">
             <div class="ibox-tools m-t-xl">
-                <a href="{{ route('parents.create') }}" class="btn btn-sm btn-primary pull-right m-t-n-xs" type="submit"><i class="fa fa-plus"></i> <strong>Create</strong></a>
+                <a href="{{ route('permissions.create') }}" class="btn btn-sm btn-primary pull-right m-t-n-xs" type="submit"><i class="fa fa-plus"></i> <strong>Create</strong></a>
             </div>
         </div>
     </div>
@@ -29,7 +29,7 @@
             <div class="col-lg-12">
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
-                        <h5>Parent</h5>
+                        <h5>Permission</h5>
                     </div>
 
                     <div class="ibox-content">
@@ -39,40 +39,20 @@
                                 <tr>
                                     <th>Sl No</th>
                                     <th>Name</th>
-                                    <th>Email</th>
-                                    <th>Phone</th>
-                                    <th>Age</th>
-                                    <th>Gender</th>
-                                    <th>Address</th>
-                                    <th>User Roll</th>
                                     <th>Actions</th>
                                 </tr>
                                 </thead>
                                 <tbody>
 
                                 @php($i=1)
-                                @foreach ($parents as $item)
+                                @foreach ($permissions as $item)
 
                                     <tr>
                                         <td>{{ $i }}</td>
-                                        <td>{{ ucfirst($item->user->name) }}</td>
-                                        <td>{{ $item->user->email }}</td>
-                                        <td>{{ $item->phone }}</td>
-                                        <td>{{ $item->age }}</td>
-                                        <td>{{ $item->gender }}</td>
-                                        <td>{{ $item->address }}</td>
+                                        <td>{{ ucfirst($item->name) }}</td>
 
                                         <td>
-                                            @if(!empty($item->user->getRoleNames()))
-                                                @foreach($item->user->getRoleNames() as $roleName)
-                                                    <label class="badge badge-primary">{{ $roleName }}</label>
-                                                @endforeach
-                                            @endif
-                                        </td>
-
-                                        <td>
-                                            <a title="Assign role" href="{{ route('assign-role.edit', $item->user->id) }}" class="cus_mini_icon color-success"> <i class="fa fa-user-plus" aria-hidden="true"></i></a>
-                                            <a title="Edit" href="{{ route('parents.edit', $item->id) }}" class="cus_mini_icon color-success"> <i class="fa fa-pencil-square-o"></i></a>
+                                            <a title="Edit" href="{{ route('permissions.edit', $item->id) }}" class="cus_mini_icon color-success"> <i class="fa fa-pencil-square-o"></i></a>
                                             <a title="Delete" data-toggle="modal" data-target="#myModal{{$item->id}}" type="button" class="cus_mini_icon color-danger"><i class="fa fa-trash"></i></a>
                                         </td>
 
@@ -84,7 +64,7 @@
                                                     <!-- Modal Header -->
                                                     <div class="modal-header">
                                                         <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                                        <h4 class="modal-title">Delete parent</h4>
+                                                        <h4 class="modal-title">Delete class</h4>
                                                     </div>
 
                                                     <!-- Modal body -->
@@ -94,7 +74,7 @@
 
                                                         <a data-dismiss="modal" class="btn btn-sm btn-warning"><strong>No</strong></a>
                                                         <button class="btn btn-sm btn-primary" type="submit" onclick="event.preventDefault();
-                                                            document.getElementById('class-delete-form{{ $item->id }}').submit();">
+                                                                document.getElementById('class-delete-form{{ $item->id }}').submit();">
                                                             <strong>Yes</strong>
                                                         </button>
                                                     </div>
@@ -108,7 +88,7 @@
                                             </div>
                                         </div>
 
-                                        <form id="class-delete-form{{ $item->id }}" method="POST" action="{{ route('parents.destroy', $item->id) }}" style="display: none" >
+                                        <form id="class-delete-form{{ $item->id }}" method="POST" action="{{ route('permissions.destroy', $item->id) }}" style="display: none" >
                                             {{method_field('DELETE')}}
                                             @csrf()
                                         </form>

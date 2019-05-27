@@ -19,6 +19,13 @@
     </div>
 @endif()
 
+@if($message = Session::get('status'))
+    <div class="alert alert-success fade in">
+        <a href="#" class="close" data-dismiss="alert">&times;</a>
+        <strong>Success!</strong> {{ $message }}.
+    </div>
+@endif()
+
 {{--Validation error--}}
 @if ($errors->any())
     <div class="form-group">

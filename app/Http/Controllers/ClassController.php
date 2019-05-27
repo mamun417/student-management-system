@@ -9,6 +9,11 @@ use Illuminate\Support\Facades\Input;
 
 class ClassController extends Controller
 {
+    function __construct()
+    {
+        $this->middleware('role:admin');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -102,9 +107,6 @@ class ClassController extends Controller
      */
     public function destroy(AllClass $class)
     {
-        return 'fd';
-
-
         if ($class->delete()){
             return back()->with('success', 'Class delete successfully');
         }

@@ -43,6 +43,7 @@
                                     <th>Class</th>
                                     <th>Email</th>
                                     <th>Phone</th>
+                                    <th>User Roll</th>
                                     <th>Actions</th>
                                 </tr>
                                 </thead>
@@ -60,6 +61,15 @@
                                         <td>{{ $item->phone }}</td>
 
                                         <td>
+                                            @if(!empty($item->user->getRoleNames()))
+                                                @foreach($item->user->getRoleNames() as $roleName)
+                                                    <label class="badge badge-primary">{{ $roleName }}</label>
+                                                @endforeach
+                                            @endif
+                                        </td>
+
+                                        <td>
+                                            <a title="Assign role" href="{{ route('assign-role.edit', $item->user->id) }}" class="cus_mini_icon color-success"> <i class="fa fa-user-plus" aria-hidden="true"></i></a>
                                             <a title="View" href="{{ route('students.show', $item->id) }}" class="cus_mini_icon color-success"> <i class="fa fa-eye"></i></a>
                                             <a title="Edit" href="{{ route('students.edit', $item->id) }}" class="cus_mini_icon color-success"> <i class="fa fa-pencil-square-o"></i></a>
                                             <a title="Delete" data-toggle="modal" data-target="#myModal{{$item->id}}" type="button" class="cus_mini_icon color-danger"><i class="fa fa-trash"></i></a>
@@ -97,7 +107,7 @@
                                             </div>
                                         </div>
 
-                                        <form id="class-delete-form{{ $item->id }}" method="POST" action="{{ route('parents.destroy', $item->id) }}" style="display: none" >
+                                        <form id="class-delete-form{{ $item->id }}" method="POST" action="{{ route('students.destroy', $item->id) }}" style="display: none" >
                                             {{method_field('DELETE')}}
                                             @csrf()
                                         </form>

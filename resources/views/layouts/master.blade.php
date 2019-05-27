@@ -24,6 +24,7 @@
     <link href="{{ asset('public/inspinia/css/plugins/jasny/jasny-bootstrap.min.css') }}" rel="stylesheet">
     <link href="{{ asset('public/inspinia/css/plugins/iCheck/custom.css') }}" rel="stylesheet">
     <link href="{{ asset('public/inspinia/css/plugins/chosen/bootstrap-chosen.css') }}" rel="stylesheet">
+    <link href="{{ asset('public/inspinia/css/plugins/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css') }}" rel="stylesheet">
 
     <link href="{{ asset('public/inspinia/css/custom_style.css') }}" rel="stylesheet">
 

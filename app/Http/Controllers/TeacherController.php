@@ -12,6 +12,11 @@ use Illuminate\Support\Facades\Hash;
 
 class TeacherController extends Controller
 {
+    function __construct()
+    {
+        $this->middleware('role:admin');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -51,6 +56,8 @@ class TeacherController extends Controller
         ]);
 
         $store = $user->teacher()->create($request->all());
+
+        $user->assignRole('teacher');
 
         if ($store){
             return redirect(route('teachers.index'))->with('success', 'Teacher created successfully');

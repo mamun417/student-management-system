@@ -13,6 +13,11 @@ use Illuminate\Support\Facades\Hash;
 
 class ParentController extends Controller
 {
+    function __construct()
+    {
+        $this->middleware('role:admin');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -49,6 +54,8 @@ class ParentController extends Controller
         ]);
 
         $store = $user->parent()->create($request->all());
+
+        $user->assignRole('parent');
 
         if ($store){
             return redirect(route('parents.index'))->with('success', 'Parent created successfully');

@@ -9,21 +9,34 @@ use App\Student;
 use App\Teacher;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Auth;
 
 class AttendanceController extends Controller
 {
     /**
      * Display a listing of the resource.
-     *
-     * @return Response
      */
+    function __construct()
+    {
+        $this->middleware('role:teacher|student');
+        $this->middleware('role:teacher', ['only' => 'show']);
+        $this->middleware('permission:attendance-list');
+        $this->middleware('permission:attendance-create', ['only' => ['store']]);
+        $this->middleware('permission:attendance-edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:attendance-delete', ['only' => ['destroy']]);
+    }
+
     public function index()
     {
         $teachers = Teacher::latest()->get();
         $classes = AllClass::latest()->get();
         $students = Student::latest()->get();
 
-        $attendances = Attendance::latest()->get();
+        if (Auth()->user()->hasRole('student')){
+            $attendances = Attendance::latest()->where('student_id', Auth()->user()->student->id)->get();
+        }else{
+            $attendances = Attendance::latest()->where('teacher_id', Auth()->user()->teacher->id)->get();
+        }
 
         return view('attendance.index', compact('attendances', 'teachers', 'classes', 'students'));
     }
@@ -47,14 +60,13 @@ class AttendanceController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'teacher_id' => 'required|numeric',
             'class_id' => 'required|numeric',
             'student_id' => 'required|numeric',
             'attendance_date' => 'required|date',
             'attendance_status' => 'required|boolean',
         ]);
 
-        $already_attendance = Attendance::where('teacher_id', $request->teacher_id)
+        $already_attendance = Attendance::where('teacher_id', Auth()->user()->teacher->id)
         ->where('class_id', $request->class_id)
         ->where('student_id', $request->student_id)
         ->where('attendance_date', $request->attendance_date)
@@ -63,6 +75,8 @@ class AttendanceController extends Controller
         if (!empty($already_attendance)){
             return back()->with('warning', 'Attendance already taken');
         }
+
+        $request['teacher_id'] = Auth()->user()->teacher->id;
 
         $store = Attendance::create($request->all());
 
@@ -107,14 +121,13 @@ class AttendanceController extends Controller
     public function update(Request $request, Attendance $attendance)
     {
         $request->validate([
-            'teacher_id' => 'required|numeric',
             'class_id' => 'required|numeric',
             'student_id' => 'required|numeric',
             'attendance_date' => 'required|date',
             'attendance_status' => 'required|boolean',
         ]);
 
-        $already_attendance = Attendance::where('teacher_id', $request->teacher_id)
+        $already_attendance = Attendance::where('teacher_id', Auth()->user()->teacher->id)
             ->where('class_id', $request->class_id)
             ->where('student_id', $request->student_id)
             ->where('attendance_date', $request->attendance_date)
@@ -124,6 +137,8 @@ class AttendanceController extends Controller
         if (!empty($already_attendance)){
             return back()->with('warning', 'Attendance already taken');
         }
+
+        $request['teacher_id'] = Auth()->user()->teacher->id;
 
         $attendance->update($request->all());
         return redirect(route('attendances.index'))->with('success', 'Attendance update successfully');

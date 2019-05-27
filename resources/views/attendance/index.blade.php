@@ -4,20 +4,15 @@
 
     <div class="row wrapper border-bottom white-bg page-heading">
         <div class="col-lg-10">
-            <h2>All Class</h2>
+            <h2>All attendance</h2>
             <ol class="breadcrumb">
                 <li>
-                    <a href="{{ route('class.index') }}">Class</a>
+                    <a href="{{ route('attendances.index') }}">Attendance</a>
                 </li>
                 <li class="active">
                     <strong>Index</strong>
                 </li>
             </ol>
-        </div>
-        <div class="col-lg-2">
-            <div class="ibox-tools m-t-xl">
-                <a href="{{ route('class.create') }}" class="btn btn-sm btn-primary pull-right m-t-n-xs" type="submit"><i class="fa fa-plus"></i> <strong>Create</strong></a>
-            </div>
         </div>
     </div>
 
@@ -27,32 +22,37 @@
 
         <div class="row">
 
-            <div class="col-lg-12">
-                <div class="ibox float-e-margins">
-                    <div class="ibox-title">
-                        <h5>Add attendance</h5>
-                        <div class="ibox-tools">
-                            <a class="collapse-link">
-                                <i class="fa fa-chevron-up"></i>
-                            </a>
+            @can('attendance-create')
+
+                <div class="col-lg-12">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <h5>Add attendance</h5>
+                            <div class="ibox-tools">
+                                <a class="collapse-link">
+                                    <i class="fa fa-chevron-up"></i>
+                                </a>
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="ibox-content" style="display: none;">
-                        <form method="POST" action="{{ route('attendances.store') }}" class="form-horizontal">
-                            @csrf()
+                        <div class="ibox-content" style="display: none;">
+                            <form method="POST" action="{{ route('attendances.store') }}" class="form-horizontal">
+                                @csrf()
 
-                            @include('attendance.element')
+                                @include('attendance.element')
 
-                        </form>
+                            </form>
+                        </div>
+
                     </div>
                 </div>
-            </div>
+
+            @endcan
 
             <div class="col-lg-12">
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
-                        <h5>Class</h5>
+                        <h5>Attendance</h5>
                     </div>
 
                     <div class="ibox-content">
@@ -67,8 +67,8 @@
                                     <th>Teacher</th>
                                     <th>Date</th>
                                     <th>Attendance Type</th>
-                                    <th>Actions</th>
-                                </tr>
+                                    @role('teacher') <th>Actions</th> @endrole
+                                 </tr>
                                 </thead>
                                 <tbody>
 
@@ -84,15 +84,24 @@
                                         <td>{{ date('d-m-Y', strtotime($item->attendance_date)) }}</td>
 
                                         <td>
-                                        <span class="{{ ($item->attendance_status == 1)?'badge-success':'badge-danger' }}" style="padding: 0 2px;border-radius: 3px">
+                                        <span class="badge {{ ($item->attendance_status == 1)?'badge-success':'badge-danger' }}">
                                             {{ ($item->attendance_status == 1)?'Present':'Absent' }}
                                         </span>
                                         </td>
 
-                                        <td>
-                                            <a title="Edit" href="{{ route('attendances.edit', $item->id) }}" class="cus_mini_icon color-success"> <i class="fa fa-pencil-square-o"></i></a>
-                                            <a title="Delete" data-toggle="modal" data-target="#myModal{{$item->id}}" type="button" class="cus_mini_icon color-danger"><i class="fa fa-trash"></i></a>
-                                        </td>
+                                        @role('teacher')
+                                            <td>
+
+                                                @can('attendance-edit')
+                                                    <a title="Edit" href="{{ route('attendances.edit', $item->id) }}" class="cus_mini_icon color-success"> <i class="fa fa-pencil-square-o"></i></a>
+                                                @endcan
+
+                                                @can('attendance-delete')
+                                                    <a title="Delete" data-toggle="modal" data-target="#myModal{{$item->id}}" type="button" class="cus_mini_icon color-danger"><i class="fa fa-trash"></i></a>
+                                                @endcan
+
+                                            </td>
+                                        @endrole
 
                                         <!-- The Modal -->
                                         <div class="modal fade in" id="myModal{{$item->id}}">
@@ -156,6 +165,7 @@
             el: "#root",
             data: {
                 students:[],
+                attendance_user_id: '',
             },
 
             mounted(){
@@ -168,6 +178,8 @@
                     class_id = e.currentTarget.value;
                     axios.get(home_url + '/students/get-student/'+class_id)
                         .then(response => {
+
+                            console.log(response.data);
                             currentApp.students = response.data;
                         })
                 },

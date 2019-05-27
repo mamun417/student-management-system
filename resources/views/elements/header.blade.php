@@ -9,7 +9,7 @@
                     <i class="fa fa-sign-out"></i> Log out
                 </a>
 
-                <form id="logout_form" action="" method="POST" style="display: none;">
+                <form id="logout_form" action="{{ route('logout') }}" method="POST" style="display: none;">
                     {{ csrf_field() }}
                 </form>
             </li>

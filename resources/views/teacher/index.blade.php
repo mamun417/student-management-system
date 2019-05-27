@@ -43,6 +43,7 @@
                                     <th>Phone</th>
                                     <th>Subject</th>
                                     <th>Address</th>
+                                    <th>User Role</th>
                                     <th>Actions</th>
                                 </tr>
                                 </thead>
@@ -60,6 +61,15 @@
                                         <td>{{ ucfirst($item->address) }}</td>
 
                                         <td>
+                                            @if(!empty($item->user->getRoleNames()))
+                                                @foreach($item->user->getRoleNames() as $roleName)
+                                                    <label class="badge badge-primary">{{ $roleName }}</label>
+                                                @endforeach
+                                            @endif
+                                        </td>
+
+                                        <td>
+                                            <a title="Assign role" href="{{ route('assign-role.edit', $item->user->id) }}" class="cus_mini_icon color-success"> <i class="fa fa-user-plus" aria-hidden="true"></i></a>
                                             <a title="Edit" href="{{ route('teachers.edit', $item->id) }}" class="cus_mini_icon color-success"> <i class="fa fa-pencil-square-o"></i></a>
                                             <a title="Delete" data-toggle="modal" data-target="#myModal{{$item->id}}" type="button" class="cus_mini_icon color-danger"><i class="fa fa-trash"></i></a>
                                         </td>

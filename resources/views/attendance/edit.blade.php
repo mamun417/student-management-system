@@ -36,7 +36,7 @@
                             @csrf()
 
                             @include('attendance.element')
-                            <input id="attandenec-id" type="hidden" value="{{ Request::segment(2) }}">
+                            <input id="attandenec-id" type="hidden" value="{{ $attendance->id }}">
 
                         </form>
                     </div>
@@ -61,7 +61,7 @@
                 class_id = $('#class').find(":selected").val();
                 this.getStudent(class_id);
 
-                //get current attendance user_id for selected
+                //get current attendance student_id for selected
                 axios.get(home_url + '/attendances/'+$('#attandenec-id').val())
                     .then(response => {
                         currentApp.attendance_user_id = response.data.student_id;
