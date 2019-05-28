@@ -10,10 +10,20 @@
             <p>Perfectly designed and precisely prepared admin theme with over 50 pages with extra new web app views.
             </p>
             <p>Login in. To see it in action.</p>
+
+            <h3 class="border-bottom">Credential</h3>
+
+            <div>
+                <p>Admin : admin@test.com - 12345678</p>
+                <p>Teacher : teacher@test.com - 12345678</p>
+                <p>Parent : parent@test.com - 12345678</p>
+                <p>Student : student@test.com - 12345678</p>
+            </div>
+
             <form class="m-t" role="form" action="{{ route('login') }}" method="post">
                 {{ csrf_field() }}
                 <div class="form-group">
-                    <input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" placeholder="aalmamun417@gmail.com" required autofocus>
+                    <input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" placeholder="Email Address" required autofocus>
 
                     @if ($errors->has('email'))
                         <span class="invalid-feedback">
@@ -23,7 +33,7 @@
                 </div>
 
                 <div class="form-group">
-                    <input id="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" placeholder="123456" required>
+                    <input id="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" placeholder="Password" required>
 
                     @if ($errors->has('password'))
                         <span class="invalid-feedback">

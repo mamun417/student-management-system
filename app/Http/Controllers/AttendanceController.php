@@ -41,8 +41,6 @@ class AttendanceController extends Controller
             $attendances = Attendance::with('user', 'user.teacher', 'class', 'userAsStudent.student')->latest()->where('teacher_id', Auth()->user()->id)->get();
         }
 
-        //dd($attendances[0]->userAsStudent->toArray());
-
         return view('attendance.index', compact('attendances', 'teachers', 'classes'));
     }
 
