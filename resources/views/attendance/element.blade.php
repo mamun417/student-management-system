@@ -39,7 +39,7 @@
                 <select class="form-control" name="student_id" required>
 
                     <option value="">--Select--</option>
-                    <option v-for="student in students" :selected="student.id == attendance_user_id ? true : false" :value="student.id">
+                    <option v-for="student in students" :selected="student.user.id == attendance_user_id ? true : false" :value="student.user.id">
                         @{{ student.user.name +' - '+ student.roll_number }}
                     </option>
 

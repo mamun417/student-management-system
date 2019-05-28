@@ -16,8 +16,10 @@
         </div>
         <div class="col-lg-2">
             <div class="ibox-tools">
-                <a href="{{ route('class.create') }}" class="btn btn-sm btn-primary pull-right m-t-n-xs" type="submit"><i
-                        class="fa fa-plus"></i> <strong>Edit</strong></a>
+                <div class="ibox-tools  m-t-xl">
+                    <a href="{{ route('class.create') }}" class="btn btn-sm btn-primary pull-right m-t-n-xs" type="submit"><i
+                            class="fa fa-plus"></i> <strong>Create</strong></a>
+                </div>
             </div>
         </div>
     </div>

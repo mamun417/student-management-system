@@ -19,28 +19,31 @@ class AttendanceController extends Controller
     function __construct()
     {
         $this->middleware('role:teacher|student|admin');
-        $this->middleware('role:teacher', ['only' => 'show']);
+        $this->middleware(['role:teacher', 'permission:attendance-edit'], ['only' => 'show']);
         $this->middleware('permission:attendance-list', ['only' => 'index']);
         $this->middleware(['role:teacher', 'permission:attendance-create'], ['only' => ['store']]);
         $this->middleware(['role:teacher', 'permission:attendance-edit'], ['only' => ['edit','update']]);
-        $this->middleware(['role:teacher', 'permission:attendance-delete'], ['only' => ['destroy']]);
+        $this->middleware(['role:teacher|admin', 'permission:attendance-delete'], ['only' => ['destroy']]);
     }
 
     public function index()
     {
         $teachers = Teacher::latest()->get();
         $classes = AllClass::latest()->get();
-        $students = Student::latest()->get();
 
-        if (Auth()->user()->hasRole('student')){
-            $attendances = Attendance::with('teacher', 'class', 'student')->latest()->where('student_id', Auth()->user()->student->id)->get();
-        }else if (Auth()->user()->hasRole('admin')){
-            $attendances = Attendance::with('teacher', 'class', 'student')->latest()->get();
-        }else{
-            $attendances = Attendance::with('teacher', 'class', 'student')->latest()->where('teacher_id', Auth()->user()->teacher->id)->get();
+        if (Auth()->user()->hasRole('admin')) {
+            $attendances = Attendance::with('user', 'user.teacher', 'class', 'userAsStudent.student')->latest()->get();
+
+        } else if (Auth()->user()->hasRole('student')) {
+            $attendances = Attendance::with('user', 'user.teacher', 'class', 'userAsStudent.student')->latest()->where('student_id', Auth()->user()->id)->get();
+
+        }  else if (Auth()->user()->hasRole('teacher')) {
+            $attendances = Attendance::with('user', 'user.teacher', 'class', 'userAsStudent.student')->latest()->where('teacher_id', Auth()->user()->id)->get();
         }
 
-        return view('attendance.index', compact('attendances', 'teachers', 'classes', 'students'));
+        //dd($attendances[0]->userAsStudent->toArray());
+
+        return view('attendance.index', compact('attendances', 'teachers', 'classes'));
     }
 
     /**
@@ -68,7 +71,7 @@ class AttendanceController extends Controller
             'attendance_status' => 'required|boolean',
         ]);
 
-        $already_attendance = Attendance::where('teacher_id', Auth()->user()->teacher->id)
+        $already_attendance = Attendance::where('teacher_id', Auth()->user()->id)
         ->where('class_id', $request->class_id)
         ->where('student_id', $request->student_id)
         ->where('attendance_date', $request->attendance_date)
@@ -78,7 +81,7 @@ class AttendanceController extends Controller
             return back()->with('warning', 'Attendance already taken');
         }
 
-        $request['teacher_id'] = Auth()->user()->teacher->id;
+        $request['teacher_id'] = Auth()->user()->id;
 
         $store = Attendance::create($request->all());
 
@@ -129,7 +132,7 @@ class AttendanceController extends Controller
             'attendance_status' => 'required|boolean',
         ]);
 
-        $already_attendance = Attendance::where('teacher_id', Auth()->user()->teacher->id)
+        $already_attendance = Attendance::where('teacher_id', Auth()->user()->id)
             ->where('class_id', $request->class_id)
             ->where('student_id', $request->student_id)
             ->where('attendance_date', $request->attendance_date)
@@ -140,7 +143,7 @@ class AttendanceController extends Controller
             return back()->with('warning', 'Attendance already taken');
         }
 
-        $request['teacher_id'] = Auth()->user()->teacher->id;
+        $request['teacher_id'] = Auth()->user()->id;
 
         $attendance->update($request->all());
         return redirect(route('attendances.index'))->with('success', 'Attendance update successfully');

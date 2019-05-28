@@ -14,10 +14,20 @@ class Attendance extends Model
         'teacher_id', 'class_id', 'student_id', 'attendance_date', 'attendance_status'
     ];
 
-    public function teacher()
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'teacher_id');
+    }
+
+    public function userAsStudent()
+    {
+        return $this->belongsTo(User::class, 'student_id');
+    }
+
+    /*public function teacher()
     {
         return $this->belongsTo(Teacher::class);
-    }
+    }*/
 
     public function class()
     {

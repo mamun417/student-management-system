@@ -28,14 +28,14 @@ class AssignRoleController extends Controller
     function update(Request $request, $id)
     {
         $this->validate($request, [
-            'roles' => 'required'
+            'role' => 'required'
         ]);
 
         $user = User::find($id);
 
         DB::table('model_has_roles')->where('model_id', $user->id)->delete();
 
-        $user->assignRole($request->roles);
+        $user->assignRole($request->role);
 
         return back()->with('success', 'Role assign successfully');
     }

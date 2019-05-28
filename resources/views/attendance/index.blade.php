@@ -67,7 +67,7 @@
                                     <th>Teacher</th>
                                     <th>Date</th>
                                     <th>Attendance Type</th>
-                                    @role('teacher') <th>Actions</th> @endrole
+                                    @role('teacher|admin') <th>Actions</th> @endrole
                                  </tr>
                                 </thead>
                                 <tbody>
@@ -77,10 +77,10 @@
 
                                     <tr>
                                         <td>{{ $i }}</td>
-                                        <td>{{ ucfirst($item->student->user->name) }}</td>
+                                        <td>{{ ucfirst($item->user->name) }}</td>
                                         <td>{{ ucfirst($item->class->name) }}</td>
-                                        <td>{{ $item->student->phone }}</td>
-                                        <td>{{ ucfirst($item->teacher->user->name) }}</td>
+                                        <td>{{ $item->userAsStudent->student->phone }}</td>
+                                        <td>{{ ucfirst($item->user->name) }}</td>
                                         <td>{{ date('d-m-Y', strtotime($item->attendance_date)) }}</td>
 
                                         <td>
@@ -89,17 +89,18 @@
                                         </span>
                                         </td>
 
-                                        @role('teacher')
+                                        @role('teacher|admin')
                                             <td>
-
-                                                @can('attendance-edit')
-                                                    <a title="Edit" href="{{ route('attendances.edit', $item->id) }}" class="cus_mini_icon color-success"> <i class="fa fa-pencil-square-o"></i></a>
-                                                @endcan
-
-                                                @can('attendance-delete')
-                                                    <a title="Delete" data-toggle="modal" data-target="#myModal{{$item->id}}" type="button" class="cus_mini_icon color-danger"><i class="fa fa-trash"></i></a>
-                                                @endcan
-
+                                                @role('teacher')
+                                                    @can('attendance-edit')
+                                                        <a title="Edit" href="{{ route('attendances.edit', $item->id) }}" class="cus_mini_icon color-success"> <i class="fa fa-pencil-square-o"></i></a>
+                                                    @endcan
+                                                @endrole
+                                                @role('teacher|admin')
+                                                    @can('attendance-delete')
+                                                        <a title="Delete" data-toggle="modal" data-target="#myModal{{$item->id}}" type="button" class="cus_mini_icon color-danger"><i class="fa fa-trash"></i></a>
+                                                    @endcan
+                                                @endrole
                                             </td>
                                         @endrole
 

@@ -25,9 +25,6 @@ class TeacherController extends Controller
     public function index()
     {
         $teachers = Teacher::with('user')->latest()->get();
-
-        //dd($teachers->toArray());
-
         return view('teacher.index', compact('teachers'));
     }
 
@@ -125,6 +122,10 @@ class TeacherController extends Controller
      */
     public function destroy(Teacher $teacher)
     {
+        if ($teacher->attendances->count() > 0){
+            return back()->with('warning', 'Not allow to delete');
+        }
+
         if ($teacher->user->delete()){
             return back()->with('success', 'Teacher delete successfully');
         }

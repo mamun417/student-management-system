@@ -26,7 +26,7 @@ class RoleController extends Controller
     public function index(Request $request)
     {
         $roles = Role::latest()->get();
-        return view('adminstration.role.index',compact('roles'));
+        return view('adminstration.role.index', compact('roles'));
     }
 
 

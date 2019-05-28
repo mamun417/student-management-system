@@ -17,7 +17,12 @@ class ChildrenController extends Controller
 
     public function index()
     {
-        $students = Student::with('user', 'parent', 'class')->where('parent_id', Auth()->user()->parent->id)->latest()->get();
+        if (Auth()->user()->parent){
+            $students = Student::with('user', 'parent', 'class')->where('parent_id', Auth()->user()->parent->id)->latest()->get();
+        }else{
+            $students = [];
+        }
+
         return view('children.index', compact('students'));
     }
 

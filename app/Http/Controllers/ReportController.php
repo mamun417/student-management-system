@@ -36,11 +36,16 @@ class ReportController extends Controller
         $month = $attendance_date[0];
         $year = $attendance_date[1];
 
-        $attendances = Attendance::with('teacher', 'class', 'student')->where('teacher_id', $request->teacher_id)
+        $attendances = Attendance::with('user', 'userAsStudent.student', 'class', 'student')
+            ->where('teacher_id', $request->teacher_id)
             ->where('class_id', $request->class_id)
             ->whereMonth('attendance_date', '=', $month)
             ->whereYear('attendance_date', '=', $year)
             ->latest()->get();
+
+        if($attendances->count() == 0){
+            return "<h2 style='text-align: center'>Sorry, Attendance not found to create report</h2>";
+        }
 
         $pdf = PDF::loadView('report.make_report', compact('attendances', 'month', 'year'));
         return $pdf->stream('report.pdf');

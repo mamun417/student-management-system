@@ -107,6 +107,10 @@ class ClassController extends Controller
      */
     public function destroy(AllClass $class)
     {
+        if ($class->attendances->count() > 0){
+            return back()->with('warning', 'Not allow to delete');
+        }
+
         if ($class->delete()){
             return back()->with('success', 'Class delete successfully');
         }

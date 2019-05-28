@@ -14,4 +14,8 @@ class AllClass extends Model
     protected $table = 'classes';
 
     protected $fillable = ['name', 'note'];
+
+    public function attendances(){
+        return $this->hasMany(Attendance::class, 'class_id');
+    }
 }

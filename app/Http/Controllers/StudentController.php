@@ -130,6 +130,10 @@ class StudentController extends Controller
      */
     public function destroy(Student $student)
     {
+        if ($student->attendances->count() > 0){
+            return back()->with('warning', 'Not allow to delete');
+        }
+
         if ($student->user->delete()){
             return back()->with('success', 'Student delete successfully');
         }

@@ -41,12 +41,11 @@
                                 <div class="col-sm-3">
                                     <div class="form-group">
                                         <label>Teacher<span class="required-star"> *</span></label>
-                                        <select class="form-control" name="teacher_id" required>
+                                        <select class="form-control chosen-select" name="teacher_id" required>
 
                                             <option value="">--Select--</option>
                                             @foreach($teachers as $teacher)
-                                                <option
-                                                    {{ (isset($attendance->teacher->id) AND $attendance->teacher->id == $teacher->id)?'selected':''}} value="{{ $teacher->id }}">
+                                                <option value="{{ $teacher->user->id }}">
                                                     {{ ucfirst($teacher->user->name) .' - '. $teacher->phone }}
                                                 </option>
                                             @endforeach
@@ -102,6 +101,12 @@
     </div>
 
     <script>
+
+        $('.chosen-select').chosen({
+            width: "100%",
+            search_contains: true
+        });
+
         $('#data_4 .input-group.date').datepicker({
             format: 'mm/yyyy',
             minViewMode: 1,

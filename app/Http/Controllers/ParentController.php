@@ -124,6 +124,10 @@ class ParentController extends Controller
      */
     public function destroy(AllParent $parent)
     {
+        if ($parent->students->count() > 0){
+            return back()->with('warning', 'Not allow to delete');
+        }
+
         if ($parent->user->delete()){
             return back()->with('success', 'Parent delete successfully');
         }

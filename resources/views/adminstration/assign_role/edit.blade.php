@@ -35,7 +35,7 @@
                                 <label class="col-lg-2 control-label">Role<span class="required-star"> *</span></label>
                                 <div class="col-lg-10">
 
-                                     <select name="roles[]" class="form-control" multiple required>
+                                     <select name="role" class="form-control" required>
 
                                           @foreach($roles as $role)
                                               <option value="{{ $role }}" {{ (in_array($role, $userRole))?'selected':'' }} >{{ $role }}</option>

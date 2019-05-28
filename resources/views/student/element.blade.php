@@ -73,7 +73,7 @@
 
             <option value="">--Select--</option>
             @foreach($parents as $parent)
-                <option value="{{ $parent->id }}" {{ (isset($student->parent_id) AND $parent->id == $student->parent_id)?'selected':old('parent_id') ==  $parent->id  ? 'selected' : '' }}>{{ ucfirst($parent->user->name) .' - '. $parent->phone }}</option>
+                <option value="{{ $parent->user->id }}" {{ (isset($student->parent_id) AND $parent->user->id == $student->parent_id)?'selected':old('parent_id') ==  $parent->user->id  ? 'selected' : '' }}>{{ ucfirst($parent->user->name) .' - '. $parent->phone }}</option>
             @endforeach
 
         </select>
@@ -103,16 +103,6 @@
         <input value="{{ isset($student->address) ? $student->address:old('address') }}" name="address" type="text" class="form-control">
     </div>
 </div>
-
-
-{{--<select multiple class="test">
-    <option value="1">1</option>
-    <option value="2">2</option>
-    <option value="3">3</option>
-</select>
-<button class="select">Select all</button>
-<button class="deselect">Deselect all</button>--}}
-​
 
 <script>
     $('.chosen-select').chosen({

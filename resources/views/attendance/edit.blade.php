@@ -64,6 +64,9 @@
                 //get current attendance student_id for selected
                 axios.get(home_url + '/attendances/'+$('#attandenec-id').val())
                     .then(response => {
+
+                        console.log(response.data);
+
                         currentApp.attendance_user_id = response.data.student_id;
                     })
             },

@@ -9,7 +9,7 @@
     </style>
 </head>
 
-    <h2 class="text-center">{{ $attendances[0]->teacher->user->name }} , {{ $month }}-{{ $year }}</h2>
+    <h2 class="text-center">{{ $attendances[0]->user->name }} , {{ $month }}-{{ $year }}</h2>
 
     <div class="ibox-content">
         <div class="table-responsive">
@@ -33,10 +33,10 @@
 
                         <tr>
                             <td>{{ $i }}</td>
-                            <td>{{ ucfirst($item->student->user->name) }}</td>
+                            <td>{{ ucfirst($item->user->name) }}</td>
                             <td>{{ ucfirst($item->class->name) }}</td>
-                            <td>{{ $item->student->phone }}</td>
-                            <td>{{ ucfirst($item->teacher->user->name) }}</td>
+                            <td>{{ $item->userAsStudent->student->phone }}</td>
+                            <td>{{ ucfirst($item->user->name) }}</td>
                             <td>{{ date('d-m-Y', strtotime($item->attendance_date)) }}</td>
 
                             <td>
