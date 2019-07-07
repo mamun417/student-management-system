@@ -42,6 +42,8 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    // hasOne (After create a user create Teacher, Parent, Student with user_id)
+
     public function teacher()
     {
         return $this->hasOne(Teacher::class);
