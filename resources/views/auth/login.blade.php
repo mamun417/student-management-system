@@ -7,8 +7,6 @@
                 <h1 class="logo-name">SMS</h1>
             </div>
             <h3>Welcome to LSMS</h3>
-            <p>Perfectly designed and precisely prepared admin theme with over 50 pages with extra new web app views.
-            </p>
             <p>Login in. To see it in action.</p>
 
             <h3 class="border-bottom">Credential</h3>
