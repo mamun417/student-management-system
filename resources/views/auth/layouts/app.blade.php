@@ -8,12 +8,12 @@
 
         <title>LSMS | Login</title>
 
-        <link href="{{ asset('public/inspinia/css/bootstrap.min.css') }}" rel="stylesheet">
-        <link href="{{ asset('public/inspinia/font-awesome/css/font-awesome.css') }}" rel="stylesheet">
-        <link href="{{ asset('public/inspinia/css/plugins/iCheck/custom.css') }}" rel="stylesheet">
-        <link href="{{ asset('public/inspinia/css/animate.css') }}" rel="stylesheet">
-        <link href="{{ asset('public/inspinia/css/style.css') }}" rel="stylesheet">
-        <link href="{{ asset('public/inspinia/css/custom_style.css') }}" rel="stylesheet">
+        <link href="{{ asset('inspinia/css/bootstrap.min.css') }}" rel="stylesheet">
+        <link href="{{ asset('inspinia/font-awesome/css/font-awesome.css') }}" rel="stylesheet">
+        <link href="{{ asset('inspinia/css/plugins/iCheck/custom.css') }}" rel="stylesheet">
+        <link href="{{ asset('inspinia/css/animate.css') }}" rel="stylesheet">
+        <link href="{{ asset('inspinia/css/style.css') }}" rel="stylesheet">
+        <link href="{{ asset('inspinia/css/custom_style.css') }}" rel="stylesheet">
 
     </head>
 
@@ -22,11 +22,11 @@
         @yield('content')
 
         <!-- Mainly scripts -->
-        <script src="{{ asset('public/inspinia/js/jquery-3.1.1.min.js') }} "></script>
-        <script src="{{ asset('public/inspinia/js/bootstrap.min.js') }} "></script>
+        <script src="{{ asset('inspinia/js/jquery-3.1.1.min.js') }} "></script>
+        <script src="{{ asset('inspinia/js/bootstrap.min.js') }} "></script>
 
         <!-- iCheck -->
-        <script src="{{ asset('public/inspinia/js/plugins/iCheck/icheck.min.js') }}"></script>
+        <script src="{{ asset('inspinia/js/plugins/iCheck/icheck.min.js') }}"></script>
         <script>
             $(document).ready(function () {
                 $('.i-checks').iCheck({

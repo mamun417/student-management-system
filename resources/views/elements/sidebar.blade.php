@@ -6,9 +6,9 @@
 
                     <?php
                     if (isset(Auth::user()->image)){
-                        $image_url = URL::to('public/uploads/images/admins/'.Auth::user()->image);
+                        $image_url = URL::to('uploads/images/admins/'.Auth::user()->image);
                     }else{
-                        $image_url = URL::to('public/img/no-image.png');
+                        $image_url = URL::to('img/no-image.png');
                     }
                     ?>
 

@@ -16,27 +16,27 @@
 
     <title>School Management System | Dashboard</title>
 
-    <link href="{{ asset('public/inspinia/css/bootstrap.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('public/inspinia/font-awesome/css/font-awesome.css') }}" rel="stylesheet">
-    <link href="{{ asset('public/inspinia/css/plugins/dataTables/datatables.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('public/inspinia/css/animate.css') }}" rel="stylesheet">
-    <link href="{{ asset('public/inspinia/css/style.css') }}" rel="stylesheet">
-    <link href="{{ asset('public/inspinia/css/plugins/jasny/jasny-bootstrap.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('public/inspinia/css/plugins/iCheck/custom.css') }}" rel="stylesheet">
-    <link href="{{ asset('public/inspinia/css/plugins/chosen/bootstrap-chosen.css') }}" rel="stylesheet">
-    <link href="{{ asset('public/inspinia/css/plugins/datapicker/datepicker3.css') }}" rel="stylesheet">
-    <link href="{{ asset('public/inspinia/css/plugins/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css') }}" rel="stylesheet">
+    <link href="{{ asset('inspinia/css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('inspinia/font-awesome/css/font-awesome.css') }}" rel="stylesheet">
+    <link href="{{ asset('inspinia/css/plugins/dataTables/datatables.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('inspinia/css/animate.css') }}" rel="stylesheet">
+    <link href="{{ asset('inspinia/css/style.css') }}" rel="stylesheet">
+    <link href="{{ asset('inspinia/css/plugins/jasny/jasny-bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('inspinia/css/plugins/iCheck/custom.css') }}" rel="stylesheet">
+    <link href="{{ asset('inspinia/css/plugins/chosen/bootstrap-chosen.css') }}" rel="stylesheet">
+    <link href="{{ asset('inspinia/css/plugins/datapicker/datepicker3.css') }}" rel="stylesheet">
+    <link href="{{ asset('inspinia/css/plugins/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css') }}" rel="stylesheet">
 
-    <link href="{{ asset('public/inspinia/css/custom_style.css') }}" rel="stylesheet">
+    <link href="{{ asset('inspinia/css/custom_style.css') }}" rel="stylesheet">
 
     <script type="text/javascript">var home_url="{{ url('/') }}"</script>
-    <script src="{{ asset('public/inspinia/js/jquery-3.1.1.min.js') }} "></script>
+    <script src="{{ asset('inspinia/js/jquery-3.1.1.min.js') }} "></script>
 
     {{--Chosen--}}
-    <script src="{{ asset('public/inspinia/js/plugins/chosen/chosen.jquery.js') }} "></script>
+    <script src="{{ asset('inspinia/js/plugins/chosen/chosen.jquery.js') }} "></script>
 
     {{--Date Picker--}}
-    <script src="{{ asset('public/inspinia/js/plugins/datapicker/bootstrap-datepicker.js') }}"></script>
+    <script src="{{ asset('inspinia/js/plugins/datapicker/bootstrap-datepicker.js') }}"></script>
 
 </head>
 
@@ -59,19 +59,19 @@
 </div>
 
 <!-- Mainly scripts -->
-<script src="{{ asset('public/inspinia/js/bootstrap.min.js') }} "></script>
+<script src="{{ asset('inspinia/js/bootstrap.min.js') }} "></script>
 
-<script src="{{ asset('public/inspinia/js/plugins/metisMenu/jquery.metisMenu.js') }} "></script>
-<script src="{{ asset('public/inspinia/js/plugins/slimscroll/jquery.slimscroll.min.js') }} "></script>
-<script src="{{ asset('public/inspinia/js/plugins/dataTables/datatables.min.js') }}"></script>
+<script src="{{ asset('inspinia/js/plugins/metisMenu/jquery.metisMenu.js') }} "></script>
+<script src="{{ asset('inspinia/js/plugins/slimscroll/jquery.slimscroll.min.js') }} "></script>
+<script src="{{ asset('inspinia/js/plugins/dataTables/datatables.min.js') }}"></script>
 
 <!-- Custom and plugin javascript -->
-<script src="{{ asset('public/inspinia/js/inspinia.js') }} "></script>
-<script src="{{ asset('public/inspinia/js/plugins/pace/pace.min.js') }} "></script>
-<script src="{{ asset('public/inspinia/js/plugins/jasny/jasny-bootstrap.min.js') }} "></script>
+<script src="{{ asset('inspinia/js/inspinia.js') }} "></script>
+<script src="{{ asset('inspinia/js/plugins/pace/pace.min.js') }} "></script>
+<script src="{{ asset('inspinia/js/plugins/jasny/jasny-bootstrap.min.js') }} "></script>
 
 {{--i-check--}}
-<script src="{{ asset('public/inspinia/js/plugins/iCheck/icheck.min.js') }}"></script>
+<script src="{{ asset('inspinia/js/plugins/iCheck/icheck.min.js') }}"></script>
 
 <script>
 

@@ -1,6 +1,6 @@
 <head>
-    <link href="{{ asset('public/inspinia/css/bootstrap.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('public/inspinia/css/style.css') }}" rel="stylesheet">
+    <link href="{{ asset('inspinia/css/bootstrap.min.css') }}" rel="stylesheet">
+{{--    <link href="{{ asset('inspinia/css/style.css') }}" rel="stylesheet">--}}
 
     <style>
         body{
